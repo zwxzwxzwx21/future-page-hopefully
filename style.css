@@ -1,0 +1,17 @@
+#banner.h1 {
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+font-size: 200%;
+
+
+}
+#OOTD {
+text-align: center;
+color: cyan;
+background-color: coral;
+height: 300px;
+}
+#banner {
+height: 150px;
+background-color:wheat ;
+text-align: center;
+}
