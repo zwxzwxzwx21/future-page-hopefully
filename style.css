@@ -1,17 +1,38 @@
-#banner.h1 {
-font-family: Verdana, Geneva, Tahoma, sans-serif;
-font-size: 200%;
-
-
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-#OOTD {
-text-align: center;
-color: cyan;
-background-color: coral;
-height: 300px;
+
+body {
+    font-family: Arial, sans-serif;
 }
-#banner {
-height: 150px;
-background-color:wheat ;
-text-align: center;
+
+header {
+    background-color: #f2f2f2;
+    padding: 20px 0;
+}
+
+#banner h1 {
+    text-align: center;
+}
+
+nav {
+    /* Navigation styles */
+}
+
+main {
+    padding: 20px;
+}
+
+#OOTD, #collection, #about {
+    margin-bottom: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
 }
