@@ -67,16 +67,22 @@ def home():
     image = None
     title = None
     link = None
-
+    price = None
+    realprice = ''
+    dolar = False
+    apos = False
     # Check if the API call was successful
     if data['request_info']['success'] and data['search_results']:
             result = data['search_results'][0]
             image = result['image']
             title = result['title']
             link = result['link']
+            price = result['prices'][0]['raw']
+            
+
     
  
-    return render_template("Mainpage.html", Fumo_picture=image,Fumo_link=link,Fumo_title=title)
+    return render_template("Mainpage.html", Fumo_picture=image,Fumo_link=link,Fumo_title=title,Fumo_price=price)
     
 
 # Make sure this is at the bottom of your script
@@ -135,3 +141,5 @@ if __name__ == '__main__':
 
 # 15. Mobile Responsiveness:
 #    - Ensure the website is fully responsive so users can browse and interact with the site on mobile devices.
+
+# 16. Guess The Fumo Quiz
