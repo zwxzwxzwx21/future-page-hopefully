@@ -1,49 +1,11 @@
-'''import requests
-import json
-from flask import Flask, render_template
-app = Flask(__name__) 
 
-@app.route('/')
-def home():
-  # set up the request parameters
-  params = {
-  'api_key': '803AD7F6083349A785387A19D385DD14',
-    'ebay_domain': 'ebay.com',
-    'search_term': 'fumo plush',
-    'type': 'search',
-    'page': '1',
-    'max_page': '1',
-    'sort_by': 'newly_listed',
-    'output': 'json',
-    'include_html': 'true'
-  }
-
-  # make the http GET request to Countdown API
-  api_result = requests.get('https://api.countdownapi.com/request', params)
-
- 
-  
-  data = api_result.json()
-  track = 0
-  image = None
-  if data["search_results"]:
-       image = data['search_results'][0]['image']
-  
-
-            
-
-  #Fumo_picture = image
-  return render_template("Mainpage.html",Fumo_picture=image)
-  if __name__ == '__main__':
-      app.run(debug=True)
-
-'''
- 
 import requests
 from flask import Flask, render_template
 
 app = Flask(__name__)
-
+key = "0c4cc278e9c7878132da2bef"
+target_currency = 'PLN'
+currency = "USD"
 @app.route('/')
 def home():
     # Set up the request parameters
@@ -84,7 +46,22 @@ def home():
  
     return render_template("Mainpage.html", Fumo_picture=image,Fumo_link=link,Fumo_title=title,Fumo_price=price)
     
+def exchange_rates(key,target_currency):
+     response = requests.get(f"http://v6.exchangerate-api.com/v6/{key}/latest/{target_currency}")
+     if response.status_code == 200:
+            data = response.json()
+            
+            rates = data['conversion_rates']
 
+            usd_to_target_rate = rates[currency]
+            return usd_to_target_rate
+     else:
+           print("fail", response.status_code)
+           return None      
+              
+rate = exchange_rates(key,target_currency)
+if rate:
+     print("rate",rate)     
 # Make sure this is at the bottom of your script
 if __name__ == '__main__':
     app.run(debug=True)
