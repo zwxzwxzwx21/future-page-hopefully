@@ -1,71 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>We Love Fumo!</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header>
         <nav>
 
-        </nav> 
+        </nav>
         <div id="banner">
             <h1>Welcome To FumoLand!</h1>
         </div>
-    </header>   
-    
+    </header>
+
     <main>
         <section id="OOTD">
             <h2>offer of the day!</h2>
             <p>{{Fumo_title}}</p>
-            
+
             <a href="{{Fumo_link}}" target="_blank">
                 <img src="{{Fumo_picture}}" alt="Fumo Auction Picture">
             </a>
-            <h2 id="price">{{Fumo_price}}</h2>
+            <table>
+            <tr>
+                <td>
+                <h2 id="price">{{Fumo_price}}</h2>
+                </td>
+                <td>
+                <h2 id="currency">USD</h2>
+                </td>
+            </tr>
+            </table>
+            <h2 id="price2">0.5</h2>
             
-            
-            <select id="currencySelect" onchange="updateCurrency()">
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="PLN">PLN</option>
-                <option value="JPY">JPY</option>
-                <option value="CAD">CAD</option>
-            </select>
-            
-            <script>
-             
-             </script>
-        </section>
-        
-        <section id="collection">
-            <h2>Featured Fumo Collection</h2>
 
-</main>
 
-<div id="footer">
-    <div id="Resources">
+            <input type="radio" name="radio" id="USD">USD<br>
+            <input type="radio" name="radio" id="EUR">EUR<br>
+            <input type="radio" name="radio" id="PLN">PLN<br>
+            <input type="radio" name="radio" id="CAD">CAD<br>
+            <input type="radio" name="radio" id="JPY">JPY<br>
+            <button type="submit" onclick="changeCurrency()">change currency</button>
+
+            <section id ="invisibl">
+                <h2 id="usd">{{cur1}}</h2>
+                <h2 id="eur">{{cur2}}</h2>
+                <h2 id="pln">{{cur3}}</h2>
+                <h2 id="cad">{{cur4}}</h2>
+                <h2 id="jpy">{{cur5}}</h2>
+            </section>
+
+                <script>
+                    function changeCurrency() {
+                        var currency = document.querySelector('input[name="radio"]:checked').id;
+                        var amount = parseFloat(document.getElementById("price").value)
+                        var amount2 = parseInt(document.getElementById("price2").value)
+                        var dollar = document.getElementById("usd").value
+                        var euro = document.getElementById("eur").value
+                        var pln = document.getElementById("pln").value
+                        var cad = document.getElementById("cad").value
+                        var jpy = document.getElementById("jpy").value
+
+                        switch (currency) {
+                            case 'USD':
+                            amount = amount * dollar
+                            amount2 = amount2 * dollar
+                            break
+                            case 'EUR':
+                            amount = amount * euro
+                            amount2 = amount2 * euro
+                            break
+                            case 'PLN':
+                            amount = amount * pln
+                            amount2 = amount2 * pln
+                            break
+                            case 'CAD':
+                            amount = amount * cad
+                            amount2 = amount2 * cad
+                            break
+                            case 'JPY':
+                            amount = amount * jpy
+                            amount2 = amount2 * jpy
+                            break
+
+                        }
+                        document.getElementById("price").innerHTML = amount
+                        document.getElementById("price2").innerHTML = amount2
+
+
+                    }
+                </script>
+            </section>
+
+            <section id="collection">
+                <h2>Featured Fumo Collection</h2>
+
+    </main>
+
+    <div id="footer">
+        <div id="Resources">
             <h3>Resources</h3>
             <table>
-                
+
                 <tr>
-                    <td><a href ="https://fumo.website/">Fumo guide!</a></td>
-                    <td><a href = "https://www.amiami.com/eng/search/list/?s_keywords=fumofumo">Fumo's Official Store</a></td>
+                    <td><a href="https://fumo.website/">Fumo guide!</a></td>
+                    <td><a href="https://www.amiami.com/eng/search/list/?s_keywords=fumofumo">Fumo's Official Store</a>
+                    </td>
                     <td></td>
                 </tr>
             </table>
-            
+
+
+        </div>
+
+        <p>Page designed and moderated by Fumo3</p>
+
 
     </div>
 
-    <p>Page designed and moderated by Fumo3</p>
-
-
-</div>
-
 </body>
+
 </html>
 <!--
 # 1. External Links Section:

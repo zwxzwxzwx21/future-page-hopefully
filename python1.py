@@ -3,14 +3,22 @@ import requests
 from flask import Flask, render_template
 
 app = Flask(__name__)
-key = "0c4cc278e9c7878132da2bef"
+key = "5BA286AD57B04CAEAF399AAE5651A540"
 target_currency = 'PLN'
 currency = "USD"
+
+currencies = ["USD","EUR","PLN","CAD","JPY"]
+price_usd = ''     
+price_eur = ''
+price_pln = ''
+price_cad = ''
+price_jpy = ''
+price_currencies = [price_usd,price_eur,price_pln,price_cad,price_jpy]
 @app.route('/')
 def home():
     # Set up the request parameters
     params = {
-        'api_key': '803AD7F6083349A785387A19D385DD14',  # Replace with your actual API key
+        'api_key': '5BA286AD57B04CAEAF399AAE5651A540',  # Replace with your actual API key
         'ebay_domain': 'ebay.com',
         'search_term': 'fumo plush',
         'type': 'search',
@@ -33,6 +41,7 @@ def home():
     realprice = ''
     dolar = False
     apos = False
+
     # Check if the API call was successful
     if data['request_info']['success'] and data['search_results']:
             result = data['search_results'][0]
@@ -40,29 +49,55 @@ def home():
             title = result['title']
             link = result['link']
             price = result['prices'][0]['raw']
-            
+            for i in range(1,len(price)):
+                realprice += price[i]    
+    
+           
 
     
  
-    return render_template("Mainpage.html", Fumo_picture=image,Fumo_link=link,Fumo_title=title,Fumo_price=price)
+    return render_template("Mainpage.html",cur1=price_usd,cur2=price_eur,cur3=price_pln,cur4=price_cad,cur5=price_jpy, Fumo_picture=image,Fumo_link=link,Fumo_title=title,Fumo_price=realprice)
     
 def exchange_rates(key,target_currency):
-     response = requests.get(f"http://v6.exchangerate-api.com/v6/{key}/latest/{target_currency}")
+     response = requests.get(f"http://v6.exchangerate-api.com/v6/{key}/latest/{currency}")
      if response.status_code == 200:
             data = response.json()
             
             rates = data['conversion_rates']
 
-            usd_to_target_rate = rates[currency]
+            usd_to_target_rate = rates[target_currency]
             return usd_to_target_rate
-     else:
-           print("fail", response.status_code)
-           return None      
-              
+
+
+with app.app_context():
+    '''for currency1 in currencies:
+        loops = 0
+        rate1 = exchange_rates("0c4cc278e9c7878132da2bef",currency1)
+        price_currencies[loops] = rate1
+        loops += 1
+    render_template("Mainpage.html",cur1=price_usd,cur2=price_eur,cur3=price_pln,cur4=price_cad,cur5=price_jpy)'''
+    
+    price_eur = exchange_rates("5BA286AD57B04CAEAF399AAE5651A540",'EUR')
+    render_template("Mainpage.html",cur1=price_eur)
+    price_usd = exchange_rates("5BA286AD57B04CAEAF399AAE5651A540",'USD')
+    render_template("Mainpage.html",cur2=price_usd)
+    price_pln = exchange_rates("5BA286AD57B04CAEAF399AAE5651A540",'PLN')
+    render_template("Mainpage.html",cur3=price_pln)
+    price_cad = exchange_rates("5BA286AD57B04CAEAF399AAE5651A540",'CAD')
+    render_template("Mainpage.html",cur4=price_cad)
+    price_jpy = exchange_rates("5BA286AD57B04CAEAF399AAE5651A540",'JPY')
+    render_template("Mainpage.html",cur5=price_jpy)
+    
+
+
+
+
 rate = exchange_rates(key,target_currency)
 if rate:
      print("rate",rate)     
-# Make sure this is at the bottom of your script
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
