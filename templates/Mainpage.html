@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>We Love Fumo!</title>
     <link rel="stylesheet" href="style.css">
+    
 </head>
 
 <body>
@@ -21,32 +22,34 @@
     <main>
         <section id="OOTD">
             <h2>offer of the day!</h2>
-            <p>{{Fumo_title}}</p>
+            <!--<p>{{Fumo_title}}</p>
 
             <a href="{{Fumo_link}}" target="_blank">
                 <img src="{{Fumo_picture}}" alt="Fumo Auction Picture">
             </a>
             <table>
             <tr>
-                <td>
+                <td>-->
                 <h2 id="price">{{Fumo_price}}</h2>
                 </td>
                 <td>
-                <h2 id="currency">USD</h2>
+                
                 </td>
             </tr>
             </table>
-            <h2 id="price2">0.5</h2>
+            <input type="number" name="userprice" id="price2"><br>
+            <div id="currency">
+                <span id="pricenum"></span>
+                <span id="currency-text"></span>
+            </div>
             
-
-
             <input type="radio" name="radio" id="USD">USD<br>
             <input type="radio" name="radio" id="EUR">EUR<br>
             <input type="radio" name="radio" id="PLN">PLN<br>
             <input type="radio" name="radio" id="CAD">CAD<br>
             <input type="radio" name="radio" id="JPY">JPY<br>
             <button type="submit" onclick="changeCurrency()">change currency</button>
-
+            
             <section id ="invisibl">
                 <h2 id="usd">{{cur1}}</h2>
                 <h2 id="eur">{{cur2}}</h2>
@@ -54,47 +57,46 @@
                 <h2 id="cad">{{cur4}}</h2>
                 <h2 id="jpy">{{cur5}}</h2>
             </section>
-
-                <script>
-                    function changeCurrency() {
-                        var currency = document.querySelector('input[name="radio"]:checked').id;
-                        var amount = parseFloat(document.getElementById("price").value)
-                        var amount2 = parseInt(document.getElementById("price2").value)
-                        var dollar = document.getElementById("usd").value
-                        var euro = document.getElementById("eur").value
-                        var pln = document.getElementById("pln").value
-                        var cad = document.getElementById("cad").value
-                        var jpy = document.getElementById("jpy").value
-
-                        switch (currency) {
-                            case 'USD':
-                            amount = amount * dollar
-                            amount2 = amount2 * dollar
-                            break
-                            case 'EUR':
-                            amount = amount * euro
-                            amount2 = amount2 * euro
-                            break
-                            case 'PLN':
-                            amount = amount * pln
-                            amount2 = amount2 * pln
-                            break
-                            case 'CAD':
-                            amount = amount * cad
-                            amount2 = amount2 * cad
-                            break
-                            case 'JPY':
-                            amount = amount * jpy
-                            amount2 = amount2 * jpy
-                            break
-
-                        }
-                        document.getElementById("price").innerHTML = amount
-                        document.getElementById("price2").innerHTML = amount2
-
-
+            
+            <script>
+                function changeCurrency() {
+                    var currency = document.querySelector('input[name="radio"]:checked').id;
+                    var amount2 = parseInt(document.getElementById("price2").value);
+                    var dollar = parseFloat(document.getElementById("usd").textContent);
+                    var curtext = parseFloat(document.getElementById("currency-text").textContent);
+                    var euro = parseFloat(document.getElementById("eur").textContent);
+                    var pln = parseFloat(document.getElementById("pln").textContent);
+                    var cad = parseFloat(document.getElementById("cad").textContent);
+                    var jpy = parseFloat(document.getElementById("jpy").textContent);
+            
+                    switch (currency) {
+                        case 'USD':
+                            amount2 = amount2 * dollar;
+                            curtext = "USD"
+                            break;
+                        case 'EUR':
+                            amount2 = amount2 * euro;
+                            curtext = "EUR"
+                            break;
+                        case 'PLN':
+                            amount2 = amount2 * pln;
+                            curtext = "PLN"
+                            break;
+                        case 'CAD':
+                            amount2 = amount2 * cad;
+                            curtext = "CAD"
+                            break;
+                        case 'JPY':
+                            amount2 = amount2 * jpy;
+                            curtext = "JPY"
+                            break;
                     }
-                </script>
+            
+                    document.getElementById("pricenum").innerHTML = amount2.toFixed(2);
+                    document.getElementById("currency-text").innerHTML =curtext
+                }
+            
+            </script>
             </section>
 
             <section id="collection">
@@ -124,7 +126,46 @@
     </div>
 
 </body>
+<style>
+    * {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
 
+body {
+font-family: Arial, sans-serif;
+}
+
+header {
+background-color: #b31e1e;
+padding: 20px 0;
+}
+
+#banner h1 {
+text-align: center;
+}
+
+nav {
+/* Navigation styles */
+}
+
+main {
+padding: 20px;
+}
+
+#OOTD, #collection, #about {
+margin-bottom: 20px;
+}
+
+footer {
+background-color: #333;
+color: white;
+text-align: center;
+padding: 10px 0;
+}
+
+</style>
 </html>
 <!--
 # 1. External Links Section:

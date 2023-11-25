@@ -1,9 +1,9 @@
 
 import requests
 from flask import Flask, render_template
-
+#from bs4 import BeautifulSoup
 app = Flask(__name__)
-key = "5BA286AD57B04CAEAF399AAE5651A540"
+key = "0c4cc278e9c7878132da2bef"
 target_currency = 'PLN'
 currency = "USD"
 
@@ -14,11 +14,14 @@ price_pln = ''
 price_cad = ''
 price_jpy = ''
 price_currencies = [price_usd,price_eur,price_pln,price_cad,price_jpy]
+
+'''THE CODE BELOW WORKS PERFECTLY FINE, JUST EBAY DOESNT WANNA COOPERATE BECAUSE IVE USED ALL CALLS IN API KEY AND I DONT WANNA PAY'''
+#region
 @app.route('/')
 def home():
-    # Set up the request parameters
+    
     params = {
-        'api_key': '5BA286AD57B04CAEAF399AAE5651A540',  # Replace with your actual API key
+        'api_key': '0c4cc278e9c7878132da2bef',  # Replace with your actual API key
         'ebay_domain': 'ebay.com',
         'search_term': 'fumo plush',
         'type': 'search',
@@ -50,14 +53,16 @@ def home():
             link = result['link']
             price = result['prices'][0]['raw']
             for i in range(1,len(price)):
-                realprice += price[i]    
-    
+                realprice += price[i]
+ #endregion   
            
 
     
  
-    return render_template("Mainpage.html",cur1=price_usd,cur2=price_eur,cur3=price_pln,cur4=price_cad,cur5=price_jpy, Fumo_picture=image,Fumo_link=link,Fumo_title=title,Fumo_price=realprice)
-    
+    #return render_template("Mainpage.html",cur1=price_usd,cur2=price_eur,cur3=price_pln,cur4=price_cad,cur5=price_jpy, Fumo_picture=image,Fumo_link=link,Fumo_title=title,Fumo_price=realprice)
+    return render_template("Mainpage.html",cur1=price_usd,cur2=price_eur,cur3=price_pln,cur4=price_cad,cur5=price_jpy)
+
+
 def exchange_rates(key,target_currency):
      response = requests.get(f"http://v6.exchangerate-api.com/v6/{key}/latest/{currency}")
      if response.status_code == 200:
@@ -70,22 +75,16 @@ def exchange_rates(key,target_currency):
 
 
 with app.app_context():
-    '''for currency1 in currencies:
-        loops = 0
-        rate1 = exchange_rates("0c4cc278e9c7878132da2bef",currency1)
-        price_currencies[loops] = rate1
-        loops += 1
-    render_template("Mainpage.html",cur1=price_usd,cur2=price_eur,cur3=price_pln,cur4=price_cad,cur5=price_jpy)'''
     
-    price_eur = exchange_rates("5BA286AD57B04CAEAF399AAE5651A540",'EUR')
+    price_eur = exchange_rates("0c4cc278e9c7878132da2bef",'EUR')
     render_template("Mainpage.html",cur1=price_eur)
-    price_usd = exchange_rates("5BA286AD57B04CAEAF399AAE5651A540",'USD')
+    price_usd = exchange_rates("0c4cc278e9c7878132da2bef",'USD')
     render_template("Mainpage.html",cur2=price_usd)
-    price_pln = exchange_rates("5BA286AD57B04CAEAF399AAE5651A540",'PLN')
+    price_pln = exchange_rates("0c4cc278e9c7878132da2bef",'PLN')
     render_template("Mainpage.html",cur3=price_pln)
-    price_cad = exchange_rates("5BA286AD57B04CAEAF399AAE5651A540",'CAD')
+    price_cad = exchange_rates("0c4cc278e9c7878132da2bef",'CAD')
     render_template("Mainpage.html",cur4=price_cad)
-    price_jpy = exchange_rates("5BA286AD57B04CAEAF399AAE5651A540",'JPY')
+    price_jpy = exchange_rates("0c4cc278e9c7878132da2bef",'JPY')
     render_template("Mainpage.html",cur5=price_jpy)
     
 
@@ -98,7 +97,7 @@ if rate:
 
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
 
 
