@@ -17,6 +17,10 @@ price_currencies = [price_usd,price_eur,price_pln,price_cad,price_jpy]
 
 '''THE CODE BELOW WORKS PERFECTLY FINE, JUST EBAY DOESNT WANNA COOPERATE BECAUSE IVE USED ALL CALLS IN API KEY AND I DONT WANNA PAY'''
 #region
+@app.route("/collection")
+def collection():
+    return render_template("collection.html")
+
 @app.route('/')
 def home():
     
@@ -86,7 +90,7 @@ with app.app_context():
     render_template("Mainpage.html",cur4=price_cad)
     price_jpy = exchange_rates("0c4cc278e9c7878132da2bef",'JPY')
     render_template("Mainpage.html",cur5=price_jpy)
-    
+
 
 
 
@@ -123,7 +127,7 @@ if __name__ == "__main__":
 
 # 6. Fumo Gallery:
 #    - Showcase a gallery of Fumo plushie pictures.
-#    - Allow users to submit their own photos to the gallery.
+#    - Allow users to submit their own photos to the gallery. // this can be done on the featured umo collection part when you have 2 fumo pics and tou can submit your own pic and it will crop ir or something making it 3 pictures on the gallery
 
 # 7. Pseudo-Forum:
 #    - Set up a simple message board or comment section where users can discuss Fumo-related topics.
@@ -154,3 +158,5 @@ if __name__ == "__main__":
 #    - Ensure the website is fully responsive so users can browse and interact with the site on mobile devices.
 
 # 16. Guess The Fumo Quiz
+
+# 17. watch showcase to which fumo etc
