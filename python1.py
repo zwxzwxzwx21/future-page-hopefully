@@ -21,6 +21,7 @@ price_currencies = [price_usd,price_eur,price_pln,price_cad,price_jpy]
 def collection():
     return render_template("collection.html")
 
+
 @app.route('/')
 def home():
     

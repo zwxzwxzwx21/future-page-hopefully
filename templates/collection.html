@@ -1,1 +1,129 @@
-<h1>seks</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Fumo Collection!</title>
+</head>
+
+<body>
+    <h1>Here are your collected and favorite plushies!</h1>
+    <h2>You can mark down those which you want to own and those which you already have!</h2>
+    <h2>You can also vote for your favorite fumo and find out which is the fans favorite!</h2>
+    <h2>left click your favorite fumo! right click to select fumos you own!</h2>
+    <img id="favorite" src="static/imgs/none.png">   
+    <section id="imageSection">
+        <div id="youmu"><img src="static/imgs/youmu.jpg"></div>
+        <div id="hatate"><img src="static/imgs/hatate.jpg"></div>
+        <div id="shion"><img src="static/imgs/shion.jpg"></div>
+        <div id="rumia"><img src="static/imgs/rumia.jpg"></div>
+        <div id="miko"><img src="static/imgs/miko.jpg"></div>
+        <div id="cirno"><img src="static/imgs/cirno.jpg"></div>
+        <div id="marisa"><img src="static/imgs/marisa.jpg"></div>
+        <div id="reimu"><img src="static/imgs/reimu.jpg"></div>
+        <div id="joon"><img src="static/imgs/joon.jpg"></div>
+        <div id="yukari"><img src="static/imgs/yukari.jpg"></div>
+        <div id="ran"><img src="static/imgs/ran.jpg"></div>
+        <div id="alice"><img src="static/imgs/alice.jpg"></div>
+        <div id="aya"><img src="static/imgs/aya.jpg"></div>
+        <div id="eiki"><img src="static/imgs/eiki.jpg"></div>
+        <div id="tenshi"><img src="static/imgs/tenshi.jpg"></div>
+        <div id="patchouli"><img src="static/imgs/patchouli.jpg"></div>
+        <div id="kokoro"><img src="static/imgs/kokoro.jpg"></div>
+        <div id="suwako"><img src="static/imgs/suwako.jpg"></div>
+        <div id="tewi"><img src="static/imgs/tewi.jpg"></div>
+        <div id="reisen"><img src="static/imgs/reisen.jpg"></div>
+        <div id="suika"><img src="static/imgs/suika.jpg"></div>
+        <div id="yuyuko"><img src="static/imgs/yuyuko.jpg"></div>
+        <div id="yuuka"><img src="static/imgs/yuuka.jpg"></div>
+        <div id="satori"><img src="static/imgs/satori.jpg"></div>
+        <div id="remilia"><img src="static/imgs/youmu.jpg"></div>
+        <div id="flandre"><img src="static/imgs/remilia.jpg"></div>
+        <div id="meiling"><img src="static/imgs/meiling.jpg"></div>
+        <div id="sakuya"><img src="static/imgs/sakuya.jpg"></div>
+        <div id="kaguya"><img src="static/imgs/kaguya.jpg"></div>
+        <div id="kasen"><img src="static/imgs/kasen.jpg"></div>
+        <div id="koishi"><img src="static/imgs/koishi.jpg"></div>
+        <div id="nitori"><img src="static/imgs/nitori.jpg"></div>
+        <div id="momiji"><img src="static/imgs/momiji.jpg"></div>
+        <div id="mokou"><img src="static/imgs/mokou.jpg"></div>
+        <div id="eirin"><img src="static/imgs/eirin.jpg"></div>
+        <div id="renko"><img src="static/imgs/renko.jpg"></div>
+        <div id="sanae"><img src="static/imgs/sanae.jpg"></div>
+        <div id=""><img src="static/imgs/youmu.jpg"></div>
+    </section>
+</body>
+<script>
+    const imageSection = document.getElementById('imageSection');
+    const images = imageSection.querySelectorAll('img');
+    const favoriteImg = document.getElementById('favorite');
+
+    images.forEach(img => {
+        img.addEventListener('click', function (event) {
+            // Handle left-click
+            if (event.ctrlKey || event.metaKey) {
+                // Use Ctrl (Windows/Linux) or Command (Mac) for multi-selection
+                this.classList.toggle('selected');
+
+                // Update favorite image src on left-click
+                if (this.classList.contains('selected')) {
+                    favoriteImg.src = this.src;
+                }
+            } else {
+                // Clear all selections if no modifier key is pressed
+                images.forEach(i => i.classList.remove('selected'));
+                this.classList.add('selected');
+
+                // Update favorite image src on single left-click
+                favoriteImg.src = this.src;
+            }
+        });
+
+        img.addEventListener('contextmenu', function (event) {
+            // Handle right-click (contextmenu)
+            event.preventDefault(); // Prevent the default context menu
+            this.classList.toggle('highlighted');
+        });
+    });
+</script>
+
+<style>
+    body {
+    background-image: url('static/imgs/bg2.png');
+    
+    
+}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+        section img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border: 10px solid transparent;
+            transition: border-color 0.5s;
+        }
+
+        section img.selected {
+            border-color: yellow; 
+        }
+
+        section img.highlighted {
+            border-color: green; 
+        }
+
+        #favorite {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border: 15px solid transparent;
+            transition: border-color 0.5s;
+        }
+    </style>
+
+</html>
