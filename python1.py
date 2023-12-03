@@ -1,6 +1,14 @@
-
+import transformers
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
 import requests
 from flask import Flask, render_template
+import site
+print("ag")
+print(site.getsitepackages())
+import sysconfig
+print(sysconfig.get_paths()["purelib"])
+
+
 #from bs4 import BeautifulSoup
 app = Flask(__name__)
 key = "0c4cc278e9c7878132da2bef"
@@ -60,12 +68,22 @@ def home():
             for i in range(1,len(price)):
                 realprice += price[i]
  #endregion   
-           
+    tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+    model = GPT2LMHeadModel.from_pretrained("gpt2")
+
+    prompt = "Opisz dzisiejszą pogodę:"
+
+    inputs = tokenizer.encode(prompt, return_tensors='pt')
+    outputs = model.generate(inputs, max_length=100, temperature=0.7, num_return_sequences=1, do_sample=True)
+
+    message = tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+    
 
     
  
     #return render_template("Mainpage.html",cur1=price_usd,cur2=price_eur,cur3=price_pln,cur4=price_cad,cur5=price_jpy, Fumo_picture=image,Fumo_link=link,Fumo_title=title,Fumo_price=realprice)
-    return render_template("Mainpage.html",cur1=price_usd,cur2=price_eur,cur3=price_pln,cur4=price_cad,cur5=price_jpy)
+    return render_template("Mainpage.html",cur1=price_usd,cur2=price_eur,cur3=price_pln,cur4=price_cad,cur5=price_jpy,message=message)
 
 
 def exchange_rates(key,target_currency):
