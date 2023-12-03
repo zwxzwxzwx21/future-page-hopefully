@@ -8,13 +8,21 @@
 </head>
 
 <body>
+
     <h1>Here are your collected and favorite plushies!</h1>
     <h2>You can mark down those which you want to own and those which you already have!</h2>
     <h2>You can also vote for your favorite fumo and find out which is the fans favorite!</h2>
     <h2>left click your favorite fumo! right click to select fumos you own!</h2>
-    <img id="favorite" src="static/imgs/none.png">   
+    <div id="fav">
+        <h2>Your favorite fumo is: <span id="fumoName"></span></h2>
+        <img id="favorite" src="static/imgs/none.png">  
+    </div>  
+     
+    
+    <h1> 
+    </div>  
     <section id="imageSection">
-        <div id="youmu"><img src="static/imgs/youmu.jpg"></div>
+        
         <div id="hatate"><img src="static/imgs/hatate.jpg"></div>
         <div id="shion"><img src="static/imgs/shion.jpg"></div>
         <div id="rumia"><img src="static/imgs/rumia.jpg"></div>
@@ -51,13 +59,16 @@
         <div id="eirin"><img src="static/imgs/eirin.jpg"></div>
         <div id="renko"><img src="static/imgs/renko.jpg"></div>
         <div id="sanae"><img src="static/imgs/sanae.jpg"></div>
-        <div id=""><img src="static/imgs/youmu.jpg"></div>
+        <div id="flandre"><img src="static/imgs/flandre.jpg"></div>
     </section>
 </body>
 <script>
     const imageSection = document.getElementById('imageSection');
     const images = imageSection.querySelectorAll('img');
     const favoriteImg = document.getElementById('favorite');
+    const favDiv = document.getElementById('fav');
+    const favText = document.querySelector('#fav h2');
+    const fumoName = document.getElementById('fumoName'); // Dodajemy tę linię
 
     images.forEach(img => {
         img.addEventListener('click', function (event) {
@@ -69,6 +80,8 @@
                 // Update favorite image src on left-click
                 if (this.classList.contains('selected')) {
                     favoriteImg.src = this.src;
+                    fumoName.textContent = this.parentElement.id;
+                    fumoName.className = this.parentElement.id;
                 }
             } else {
                 // Clear all selections if no modifier key is pressed
@@ -77,6 +90,8 @@
 
                 // Update favorite image src on single left-click
                 favoriteImg.src = this.src;
+                fumoName.textContent = this.parentElement.id;
+                fumoName.className = this.parentElement.id;
             }
         });
 
@@ -88,10 +103,53 @@
     });
 </script>
 
+
+
+
 <style>
-    body {
-    background-image: url('static/imgs/bg2.png');
     
+.cirno {
+    color: lightblue;
+}
+.reimu,.meiling,.flandre {
+    color: red;
+}
+.hatate,.patchouli {
+color: purple;
+}
+.shion,.tenshi {
+    color: blue;
+}
+.nitori {
+    color: rgb(41, 136, 160)
+}
+.rumia,.alice,.ran {
+color: yellow;
+}
+.kokoro,.remilia,.satori,.kasen,.yuyuko {
+color: pink;
+}
+.youmu,.eiki.sakuya,.yukari {
+    color: gray;;
+}
+.tewi,.suika,.joon,.suwako {
+    color: orange;
+}
+.reisen {
+    color: violet;
+}
+.aya,.marisa,.kaguya,.renko {
+    color:black
+}
+.sanae,.yuuka {color: greenyellow;}
+.koishi {color: mediumaquamarine;}
+.mokou,.momiji {color: lightgray;}
+.miko {color: bisque;}
+.eiki {color: darkgreen;}
+    body {
+    /*background-image: url('static/imgs/bg2.png');*/
+    color: black;
+    text-shadow: white 1px 0 5px;
     
 }
 
